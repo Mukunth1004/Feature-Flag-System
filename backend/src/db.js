@@ -16,17 +16,22 @@ db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 
 db.exec(`
-  CREATE TABLE IF NOT EXISTS organizations (
+  CREATE TABLE IF NOT EXISTS roles (
     id   INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT    NOT NULL UNIQUE,
-    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    name TEXT    NOT NULL UNIQUE
+  );
+
+  CREATE TABLE IF NOT EXISTS organizations (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    name       TEXT    NOT NULL UNIQUE,
+    created_at TEXT    NOT NULL DEFAULT (datetime('now'))
   );
 
   CREATE TABLE IF NOT EXISTS users (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     email         TEXT    NOT NULL UNIQUE,
     password_hash TEXT    NOT NULL,
-    role          TEXT    NOT NULL CHECK(role IN ('org_admin')),
+    role          TEXT    NOT NULL REFERENCES roles(name),
     org_id        INTEGER NOT NULL REFERENCES organizations(id),
     created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
   );
@@ -41,5 +46,10 @@ db.exec(`
     UNIQUE(key, org_id)
   );
 `);
+
+// Seed roles
+db.prepare(`INSERT OR IGNORE INTO roles (name) VALUES ('super_admin')`).run();
+db.prepare(`INSERT OR IGNORE INTO roles (name) VALUES ('org_admin')`).run();
+db.prepare(`INSERT OR IGNORE INTO roles (name) VALUES ('end_user')`).run();
 
 module.exports = db;

@@ -33,8 +33,7 @@ router.post('/organizations', requireSuperAdmin, (req, res) => {
     return res.status(400).json({ error: 'Organization name required' });
   }
   try {
-    const stmt = db.prepare('INSERT INTO organizations (name) VALUES (?)');
-    const result = stmt.run(name.trim());
+    const result = db.prepare('INSERT INTO organizations (name) VALUES (?)').run(name.trim());
     const org = db.prepare('SELECT * FROM organizations WHERE id = ?').get(result.lastInsertRowid);
     return res.status(201).json(org);
   } catch (err) {
@@ -47,8 +46,30 @@ router.post('/organizations', requireSuperAdmin, (req, res) => {
 
 // GET /api/super-admin/organizations
 router.get('/organizations', requireSuperAdmin, (req, res) => {
-  const orgs = db.prepare('SELECT * FROM organizations ORDER BY created_at DESC').all();
+  const orgs = db.prepare(`
+    SELECT
+      o.*,
+      COUNT(DISTINCT CASE WHEN u.role = 'org_admin' THEN u.id END) AS admin_count,
+      COUNT(DISTINCT CASE WHEN u.role = 'end_user'  THEN u.id END) AS user_count,
+      COUNT(DISTINCT f.id) AS flag_count
+    FROM organizations o
+    LEFT JOIN users u ON u.org_id = o.id
+    LEFT JOIN feature_flags f ON f.org_id = o.id
+    GROUP BY o.id
+    ORDER BY o.created_at DESC
+  `).all();
   return res.json(orgs);
+});
+
+// GET /api/super-admin/stats
+router.get('/stats', requireSuperAdmin, (req, res) => {
+  const stats = {
+    orgs:   db.prepare('SELECT COUNT(*) as c FROM organizations').get().c,
+    admins: db.prepare("SELECT COUNT(*) as c FROM users WHERE role = 'org_admin'").get().c,
+    users:  db.prepare("SELECT COUNT(*) as c FROM users WHERE role = 'end_user'").get().c,
+    flags:  db.prepare('SELECT COUNT(*) as c FROM feature_flags').get().c,
+  };
+  return res.json(stats);
 });
 
 module.exports = router;

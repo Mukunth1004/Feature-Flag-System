@@ -8,125 +8,121 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
     header { background: #16213e; color: #fff; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.1rem; font-weight: 600; }
-    #logout-btn { background: #e74c3c; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
-    .container { max-width: 900px; margin: 36px auto; padding: 0 16px; }
-    .card { background: #fff; border-radius: 10px; padding: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 24px; }
-    h2 { font-size: 1.15rem; margin-bottom: 18px; color: #1a1a2e; }
-    label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; color: #555; }
-    input, select { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; background: #fff; transition: border-color 0.2s; }
+    header h1 { font-size: 1rem; font-weight: 600; }
+    header .org-pill { background: rgba(255,255,255,0.15); padding: 3px 12px; border-radius: 20px; font-size: 0.78rem; margin-left: 10px; }
+    #logout-btn { background: #e74c3c; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
+    .container { max-width: 920px; margin: 32px auto; padding: 0 16px; }
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+    .stat-card { background: #fff; border-radius: 10px; padding: 16px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .stat-card .num { font-size: 1.6rem; font-weight: 700; }
+    .stat-card.total .num { color: #16213e; }
+    .stat-card.on .num    { color: #27ae60; }
+    .stat-card.off .num   { color: #e74c3c; }
+    .stat-card .lbl { font-size: 0.78rem; color: #888; margin-top: 2px; }
+    .card { background: #fff; border-radius: 10px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px; }
+    h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+    label { display: block; font-size: 0.82rem; font-weight: 500; margin-bottom: 5px; color: #555; }
+    input, select { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.88rem; outline: none; background: #fff; transition: border-color 0.2s; }
     input:focus, select:focus { border-color: #16213e; }
     .form-group { margin-bottom: 14px; }
-    .form-row { display: flex; gap: 14px; }
-    .form-row .form-group { flex: 1; }
-    button.primary { background: #16213e; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: background 0.2s; }
-    button.primary:hover { background: #1a1a2e; }
-    button.danger { background: #e74c3c; color: #fff; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.82rem; }
-    button.danger:hover { background: #c0392b; }
-    .msg { margin-top: 12px; font-size: 0.88rem; padding: 8px 12px; border-radius: 6px; }
+    .form-row { display: flex; gap: 12px; align-items: flex-end; }
+    .form-row .form-group { flex: 1; margin-bottom: 0; }
+    button.btn { background: #16213e; color: #fff; border: none; padding: 9px 20px; border-radius: 6px; cursor: pointer; font-size: 0.88rem; font-weight: 500; white-space: nowrap; }
+    button.btn:hover { opacity: 0.88; }
+    button.btn.danger { background: #e74c3c; }
+    button.btn.ghost  { background: transparent; color: #16213e; border: 1px solid #ddd; }
+    button.btn.ghost:hover { background: #f5f5f5; }
+    button.btn.sm { padding: 5px 12px; font-size: 0.8rem; }
+    .msg { margin-top: 10px; font-size: 0.83rem; padding: 7px 11px; border-radius: 6px; }
     .msg.success { background: #d4edda; color: #155724; }
-    .msg.error { background: #f8d7da; color: #721c24; }
+    .msg.error   { background: #f8d7da; color: #721c24; }
     table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-    th { background: #f8f9fa; font-weight: 600; color: #555; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.87rem; }
+    th { background: #fafafa; font-weight: 600; color: #555; font-size: 0.77rem; text-transform: uppercase; letter-spacing: 0.5px; }
     tr:last-child td { border-bottom: none; }
-    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .key-cell { font-family: monospace; font-size: 0.88rem; color: #16213e; font-weight: 500; }
+    .toggle { position: relative; display: inline-block; width: 40px; height: 22px; }
     .toggle input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; border-radius: 24px; transition: .3s; }
-    .slider::before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .3s; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background: #ddd; border-radius: 22px; transition: .25s; }
+    .slider::before { content:""; position:absolute; height:16px; width:16px; left:3px; bottom:3px; background:#fff; border-radius:50%; transition:.25s; }
     input:checked + .slider { background: #27ae60; }
-    input:checked + .slider::before { transform: translateX(20px); }
-    .enabled-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
-    .enabled-badge.on { background: #d4edda; color: #155724; }
-    .enabled-badge.off { background: #f8d7da; color: #721c24; }
-    #auth-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-    .auth-card { background: #fff; border-radius: 10px; padding: 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-    .auth-tabs { display: flex; margin-bottom: 24px; border-bottom: 2px solid #eee; }
-    .auth-tab { padding: 8px 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; border-bottom: 2px solid transparent; margin-bottom: -2px; color: #888; }
-    .auth-tab.active { color: #16213e; border-color: #16213e; }
+    input:checked + .slider::before { transform: translateX(18px); }
+    .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .pill.on  { background: #d4edda; color: #155724; }
+    .pill.off { background: #fde8e8; color: #8b1a1a; }
+    .actions { display: flex; align-items: center; gap: 8px; }
+    .empty { color: #bbb; font-size: 0.88rem; text-align: center; padding: 28px 0; }
+    #auth-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .auth-card { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    .tabs { display: flex; border-bottom: 2px solid #eee; margin-bottom: 22px; }
+    .tab { padding: 7px 18px; cursor: pointer; font-weight: 600; font-size: 0.88rem; border-bottom: 2px solid transparent; margin-bottom: -2px; color: #aaa; }
+    .tab.active { color: #16213e; border-color: #16213e; }
     #app { display: none; }
-    .empty { color: #aaa; font-size: 0.9rem; text-align: center; padding: 20px 0; }
-    .key-cell { font-family: monospace; font-size: 0.9rem; color: #16213e; }
-    td .actions { display: flex; align-items: center; gap: 12px; }
+    .search-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    .search-row input { flex: 1; }
+    .edit-row { display: flex; gap: 6px; }
+    .edit-row input { flex: 1; font-family: monospace; font-size: 0.85rem; padding: 5px 8px; }
   </style>
 </head>
 <body>
 
-<!-- Auth Screen -->
 <div id="auth-screen">
   <div class="auth-card">
-    <div class="auth-tabs">
-      <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Login</div>
-      <div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div>
+    <div class="tabs">
+      <div class="tab active" id="tab-login" onclick="switchTab('login')">Login</div>
+      <div class="tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div>
     </div>
 
-    <!-- Login Form -->
     <div id="form-login">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="l-email" placeholder="admin@example.com" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="l-password" placeholder="••••••••" />
-      </div>
-      <button class="primary" onclick="login()" style="width:100%">Login</button>
+      <div class="form-group"><label>Email</label><input type="email" id="l-email" placeholder="admin@example.com" /></div>
+      <div class="form-group"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••" /></div>
+      <button class="btn" onclick="login()" style="width:100%">Login</button>
       <div id="login-msg"></div>
     </div>
 
-    <!-- Signup Form -->
     <div id="form-signup" style="display:none">
       <div class="form-group">
         <label>Organization</label>
-        <select id="s-org">
-          <option value="">Loading organizations...</option>
-        </select>
+        <select id="s-org"><option value="">Loading...</option></select>
       </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="s-email" placeholder="admin@example.com" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="s-password" placeholder="Min 6 characters" />
-      </div>
-      <button class="primary" onclick="signup()" style="width:100%">Create Account</button>
+      <div class="form-group"><label>Email</label><input type="email" id="s-email" placeholder="admin@example.com" /></div>
+      <div class="form-group"><label>Password</label><input type="password" id="s-pass" placeholder="Min 6 characters" /></div>
+      <button class="btn" onclick="signup()" style="width:100%">Create Account</button>
       <div id="signup-msg"></div>
     </div>
   </div>
 </div>
 
-<!-- App Screen -->
 <div id="app">
   <header>
-    <h1>Admin Dashboard — <span id="org-label"></span></h1>
+    <h1>Admin Dashboard <span class="org-pill" id="org-label">—</span></h1>
     <button id="logout-btn" onclick="logout()">Logout</button>
   </header>
   <div class="container">
 
-    <!-- Create Flag -->
+    <div class="stats-row">
+      <div class="stat-card total"><div class="num" id="st-total">—</div><div class="lbl">Total Flags</div></div>
+      <div class="stat-card on">  <div class="num" id="st-on">—</div>   <div class="lbl">Enabled</div></div>
+      <div class="stat-card off"> <div class="num" id="st-off">—</div>  <div class="lbl">Disabled</div></div>
+    </div>
+
     <div class="card">
       <h2>Create Feature Flag</h2>
       <div class="form-row">
-        <div class="form-group">
-          <label>Feature Key</label>
-          <input type="text" id="flag-key" placeholder="e.g. dark_mode or new_checkout" />
+        <div class="form-group"><label>Feature Key</label><input type="text" id="flag-key" placeholder="e.g. dark_mode" /></div>
+        <div class="form-group" style="flex:0 0 150px"><label>Initial State</label>
+          <select id="flag-state"><option value="false">Disabled</option><option value="true">Enabled</option></select>
         </div>
-        <div class="form-group" style="flex:0 0 140px">
-          <label>Initial State</label>
-          <select id="flag-state">
-            <option value="false">Disabled</option>
-            <option value="true">Enabled</option>
-          </select>
-        </div>
+        <button class="btn" onclick="createFlag()" style="margin-bottom:0">Add Flag</button>
       </div>
-      <button class="primary" onclick="createFlag()">Create Flag</button>
       <div id="flag-msg"></div>
     </div>
 
-    <!-- Flags Table -->
     <div class="card">
       <h2>Feature Flags</h2>
+      <div class="search-row">
+        <input type="text" id="search-input" placeholder="Search flags..." oninput="loadFlags()" />
+      </div>
       <div id="flags-list"><p class="empty">Loading...</p></div>
     </div>
 
@@ -136,8 +132,7 @@
 <script>
   const API = 'http://localhost:4000/api';
   let token = localStorage.getItem('admin_token');
-  let orgId = localStorage.getItem('admin_org_id');
-  let orgs = [];
+  let orgId  = localStorage.getItem('admin_org_id');
 
   function showMsg(id, text, type) {
     const el = document.getElementById(id);
@@ -156,59 +151,46 @@
   }
 
   function switchTab(tab) {
-    document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('form-login').style.display  = tab === 'login'  ? 'block' : 'none';
     document.getElementById('form-signup').style.display = tab === 'signup' ? 'block' : 'none';
-    document.getElementById('tab-login').className = 'auth-tab' + (tab === 'login' ? ' active' : '');
-    document.getElementById('tab-signup').className = 'auth-tab' + (tab === 'signup' ? ' active' : '');
+    document.getElementById('tab-login').className  = 'tab' + (tab === 'login'  ? ' active' : '');
+    document.getElementById('tab-signup').className = 'tab' + (tab === 'signup' ? ' active' : '');
   }
 
   async function loadOrgsForSignup() {
     try {
-      orgs = await apiFetch('/user/organizations');
+      const orgs = await apiFetch('/user/organizations');
       const sel = document.getElementById('s-org');
-      if (!orgs.length) {
-        sel.innerHTML = '<option value="">No organizations available</option>';
-        return;
-      }
-      sel.innerHTML = orgs.map(o => `<option value="${o.id}">${o.name}</option>`).join('');
-    } catch { /* ignore */ }
+      sel.innerHTML = orgs.length
+        ? orgs.map(o => `<option value="${o.id}">${o.name}</option>`).join('')
+        : '<option value="">No organizations available</option>';
+    } catch {}
   }
 
   async function login() {
     const email = document.getElementById('l-email').value.trim();
-    const password = document.getElementById('l-password').value;
+    const password = document.getElementById('l-pass').value;
     try {
-      const data = await apiFetch('/admin/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password })
-      });
-      token = data.token;
-      orgId = data.org_id;
+      const data = await apiFetch('/admin/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+      token = data.token; orgId = data.org_id;
       localStorage.setItem('admin_token', token);
       localStorage.setItem('admin_org_id', orgId);
       showApp();
-    } catch (e) {
-      showMsg('login-msg', e.message, 'error');
-    }
+    } catch (e) { showMsg('login-msg', e.message, 'error'); }
   }
 
   async function signup() {
-    const org_id = parseInt(document.getElementById('s-org').value);
-    const email = document.getElementById('s-email').value.trim();
-    const password = document.getElementById('s-password').value;
-    if (!org_id) return showMsg('signup-msg', 'Please select an organization', 'error');
-    if (!email) return showMsg('signup-msg', 'Email is required', 'error');
+    const org_id   = parseInt(document.getElementById('s-org').value);
+    const email    = document.getElementById('s-email').value.trim();
+    const password = document.getElementById('s-pass').value;
+    if (!org_id)          return showMsg('signup-msg', 'Select an organization', 'error');
+    if (!email)           return showMsg('signup-msg', 'Email is required', 'error');
     if (password.length < 6) return showMsg('signup-msg', 'Password must be at least 6 characters', 'error');
     try {
-      await apiFetch('/admin/signup', {
-        method: 'POST',
-        body: JSON.stringify({ email, password, org_id })
-      });
+      await apiFetch('/admin/signup', { method: 'POST', body: JSON.stringify({ email, password, org_id }) });
       showMsg('signup-msg', 'Account created! Please log in.', 'success');
       setTimeout(() => switchTab('login'), 1500);
-    } catch (e) {
-      showMsg('signup-msg', e.message, 'error');
-    }
+    } catch (e) { showMsg('signup-msg', e.message, 'error'); }
   }
 
   function logout() {
@@ -222,88 +204,106 @@
   async function showApp() {
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    // Decode org name from orgs list or just show org id
     try {
-      const orgList = await apiFetch('/user/organizations');
-      const org = orgList.find(o => o.id == orgId);
+      const orgs = await apiFetch('/user/organizations');
+      const org  = orgs.find(o => o.id == orgId);
       document.getElementById('org-label').textContent = org ? org.name : `Org #${orgId}`;
-    } catch { document.getElementById('org-label').textContent = `Org #${orgId}`; }
+    } catch {}
+    loadStats();
     loadFlags();
   }
 
+  async function loadStats() {
+    try {
+      const s = await apiFetch('/admin/stats');
+      document.getElementById('st-total').textContent = s.total;
+      document.getElementById('st-on').textContent    = s.enabled;
+      document.getElementById('st-off').textContent   = s.disabled;
+    } catch {}
+  }
+
   async function createFlag() {
-    const key = document.getElementById('flag-key').value.trim();
+    const key     = document.getElementById('flag-key').value.trim();
     const enabled = document.getElementById('flag-state').value === 'true';
     if (!key) return showMsg('flag-msg', 'Feature key is required', 'error');
     try {
-      await apiFetch('/admin/flags', {
-        method: 'POST',
-        body: JSON.stringify({ key, enabled })
-      });
+      await apiFetch('/admin/flags', { method: 'POST', body: JSON.stringify({ key, enabled }) });
       document.getElementById('flag-key').value = '';
       showMsg('flag-msg', `Flag "${key}" created`, 'success');
-      loadFlags();
-    } catch (e) {
-      showMsg('flag-msg', e.message, 'error');
-    }
+      loadStats(); loadFlags();
+    } catch (e) { showMsg('flag-msg', e.message, 'error'); }
   }
 
-  async function toggleFlag(id, currentEnabled) {
+  async function toggleFlag(id, current) {
     try {
-      await apiFetch(`/admin/flags/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ enabled: !currentEnabled })
-      });
+      await apiFetch(`/admin/flags/${id}`, { method: 'PATCH', body: JSON.stringify({ enabled: !current }) });
+      loadStats(); loadFlags();
+    } catch (e) { alert(e.message); }
+  }
+
+  async function saveKey(id, newKey) {
+    if (!newKey.trim()) return alert('Key cannot be empty');
+    try {
+      await apiFetch(`/admin/flags/${id}`, { method: 'PATCH', body: JSON.stringify({ key: newKey }) });
       loadFlags();
-    } catch (e) {
-      alert(e.message);
-    }
+    } catch (e) { alert(e.message); }
   }
 
   async function deleteFlag(id, key) {
-    if (!confirm(`Delete flag "${key}"? This cannot be undone.`)) return;
+    if (!confirm(`Delete flag "${key}"?`)) return;
     try {
       await apiFetch(`/admin/flags/${id}`, { method: 'DELETE' });
-      loadFlags();
-    } catch (e) {
-      alert(e.message);
-    }
+      loadStats(); loadFlags();
+    } catch (e) { alert(e.message); }
+  }
+
+  function startEdit(id, currentKey) {
+    const cell = document.getElementById('key-cell-' + id);
+    cell.innerHTML = `
+      <div class="edit-row">
+        <input type="text" value="${currentKey}" id="edit-input-${id}" />
+        <button class="btn sm" onclick="saveKey(${id}, document.getElementById('edit-input-${id}').value)">Save</button>
+        <button class="btn sm ghost" onclick="loadFlags()">Cancel</button>
+      </div>`;
+    document.getElementById('edit-input-' + id).focus();
   }
 
   async function loadFlags() {
+    const search = document.getElementById('search-input')?.value || '';
     try {
-      const flags = await apiFetch('/admin/flags');
+      const flags = await apiFetch('/admin/flags' + (search ? `?search=${encodeURIComponent(search)}` : ''));
       const el = document.getElementById('flags-list');
       if (!flags.length) {
-        el.innerHTML = '<p class="empty">No feature flags yet. Create one above.</p>';
+        el.innerHTML = '<p class="empty">' + (search ? 'No flags match your search.' : 'No flags yet. Create one above.') + '</p>';
         return;
       }
       el.innerHTML = `
         <table>
-          <thead><tr><th>Key</th><th>Status</th><th>Toggle</th><th>Created</th><th>Action</th></tr></thead>
+          <thead><tr><th>Key</th><th>Status</th><th>Enable / Disable</th><th>Last Updated</th><th>Actions</th></tr></thead>
           <tbody>
             ${flags.map(f => `
               <tr>
-                <td class="key-cell">${f.key}</td>
-                <td><span class="enabled-badge ${f.enabled ? 'on' : 'off'}">${f.enabled ? 'Enabled' : 'Disabled'}</span></td>
+                <td id="key-cell-${f.id}" class="key-cell">${f.key}</td>
+                <td><span class="pill ${f.enabled ? 'on' : 'off'}">${f.enabled ? 'Enabled' : 'Disabled'}</span></td>
                 <td>
                   <label class="toggle">
                     <input type="checkbox" ${f.enabled ? 'checked' : ''} onchange="toggleFlag(${f.id}, ${!!f.enabled})" />
                     <span class="slider"></span>
                   </label>
                 </td>
-                <td>${new Date(f.created_at + ' UTC').toLocaleDateString()}</td>
-                <td><button class="danger" onclick="deleteFlag(${f.id}, '${f.key}')">Delete</button></td>
-              </tr>
-            `).join('')}
+                <td style="color:#999;font-size:0.8rem">${new Date(f.updated_at + ' UTC').toLocaleString()}</td>
+                <td>
+                  <div class="actions">
+                    <button class="btn sm ghost" onclick="startEdit(${f.id}, '${f.key}')">Rename</button>
+                    <button class="btn sm danger" onclick="deleteFlag(${f.id}, '${f.key}')">Delete</button>
+                  </div>
+                </td>
+              </tr>`).join('')}
           </tbody>
         </table>`;
-    } catch (e) {
-      document.getElementById('flags-list').innerHTML = '<p class="empty">Failed to load flags.</p>';
-    }
+    } catch { document.getElementById('flags-list').innerHTML = '<p class="empty">Failed to load flags.</p>'; }
   }
 
-  // Init
   loadOrgsForSignup();
   if (token && orgId) showApp();
 </script>
